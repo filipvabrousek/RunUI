@@ -8,12 +8,12 @@
 view.pin(a: .top, b: .center, ac: 200, bc: 0, w: 200, h: 30, to: nil)
 ```
 
-.bottomPin
+### .bottomPin
 ```swift
 map.bottomPin(top: 250, safe: false)
 ```
 
-.pinTo
+### .pinTo
 ```swift
 view.pinTo(another, position: .bottom, h: 40, margin: 10)
 ```
