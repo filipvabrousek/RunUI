@@ -1,6 +1,20 @@
 # Pin.swift
 * Simple Swift Auto Layout library for building effortless constraints
 
+## Examples:
+
+```swift
+view.pin(a: .top, b: .center, ac: 200, bc: 0, w: 200, h: 30, to: nil)
+```
+```swift
+map.bottomPin(top: 250, safe: false)
+```
+
+```swift
+view.pinTo(another, position: .bottom, h: 40, margin: 10)
+```
+
+## Source:
 ```swift
 
 import UIKit
