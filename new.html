@@ -54,7 +54,7 @@
 <div id="add-wrapper">
     
     
-      <button class="addrace">About us</button>
+    <button class="addrace">About us</button>
     </div>
     
     </div>
@@ -284,11 +284,14 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
            padding: 4em;
        }
     
-    
+   
 /* -------------------------------- MEDIA QUERIES -------------------------------- */
     
    @media only screen and (max-width: 70em) { 
 	
+       #align {
+            height: 130vw;
+       }
        .maintitle {
            position: absolute;
            margin-top: -3em;
@@ -297,7 +300,9 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
        }
        
        .addrace {
-           padding: 1em 0.666em 1em 0.6666em;
+           
+           padding: 1em 0em 1em 0em;
+           width: 30vw;
        }
        
        .title {
@@ -410,6 +415,13 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
       
       
 }
+    
+ @media only screen and (max-width: 40em){
+        .addrace {
+           
+             width: 70vw;
+        }
+    }
 
 </style>
     
