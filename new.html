@@ -326,19 +326,23 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
   /* -------------------------------- MEDIA QUERIES -------------------------------- */
 
   @media only screen and (max-width: 70em) {
-  	#align {
+  
+    #align {
   		height: 130vw;
   	}
+      
   	.maintitle {
   		position: absolute;
   		margin-top: -3em;
   		z-index: 1;
   		font-size: 4em;
   	}
+      
   	.addrace {
   		padding: 1em 0em 1em 0em;
   		width: 30vw;
   	}
+      
   	.title {
   		margin-left: 0em;
   		width: 100vw;
@@ -356,25 +360,23 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
   		align-items: center;
   		margin-bottom: 2em;
   	}
+      
   	#hide {
   		display: block;
   		font-size: 4em;
   		background: none;
   		color: white;
+        z-index: 11;
   	}
-  	/*  #hide {
-        position: absolute;
-           
-        top: 6em;
-        font-size: 3em;
-    }*/
+  	
   	#navback {
   		display: none;
   		width: 100%;
   		margin-top: -220px;
   		height: 160em;
   		background: #3498db;
-  		z-index: 1;
+  		z-index: 10;
+        position: relative;
   	}
   	#left {
   		display: none;
@@ -382,6 +384,7 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
   		width: 100vw;
   		margin-left: 0vw;
   		margin-top: -140em;
+        z-index: 11;
   	}
   	#left>button {
   		padding-bottom: .3em;
