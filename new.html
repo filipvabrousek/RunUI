@@ -85,7 +85,7 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
                 <section class="card-content">
                     <h2>DES SABLES</h2>
                     <p>249km race in Sahara</p>
-                    <a class="card-link" href="https://marathondessables.co.uk/">+</a>
+                    
                 </section>
             </section>
             
@@ -96,7 +96,7 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
                 <section class="card-content">
                     <h2>JUNGLE ULTRA</h2>
                     <p>230km in Peru</p>
-                     <a class="card-link" href="http://beyondtheultimate.co.uk/ultra/jungle-ultra/#!/2018/06/03">+</a>
+                  
                 </section>
             </section>
             
@@ -107,10 +107,9 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
                 <section class="card-content">
                     <h2>BAD WATER</h2>
                     <p>217 km race </p>
-                     <a class="card-link" href="http://www.badwater.com/">+</a>
+                     
                 </section>
             </section>
-            
             
             
             
@@ -121,7 +120,7 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
                 <section class="card-content">
                     <h2>SPARTAN RACE</h2>
                     <p> races full of obstacles </p>
-                   <a class="card-link" href="http://www.spartathlon.gr/en/home.html">+</a>
+
                 </section>
 
             </section>
@@ -323,114 +322,7 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
   	padding: 4em;
   }
 
-  /* -------------------------------- MEDIA QUERIES -------------------------------- */
-
-  @media only screen and (max-width: 70em) {
-  
-    #align {
-  		height: 130vw;
-  	}
-      
-  	.maintitle {
-  		position: absolute;
-  		margin-top: -3em;
-  		z-index: 1;
-  		font-size: 4em;
-  	}
-      
-  	.addrace {
-  		padding: 1em 0em 1em 0em;
-  		width: 30vw;
-  	}
-      
-  	.title {
-  		margin-left: 0em;
-  		width: 100vw;
-  		text-align: center;
-  	}
-  	#center-hide {
-  		position: absolute;
-  		margin-top: 4em;
-  		padding-top: 2em;
-  		height: 6vw;
-  		width: 100vw;
-  		display: flex;
-  		flex-direction: column;
-  		justify-content: center;
-  		align-items: center;
-  		margin-bottom: 2em;
-  	}
-      
-  	#hide {
-  		display: block;
-  		font-size: 4em;
-  		background: none;
-  		color: white;
-        z-index: 11;
-  	}
-  	
-  	#navback {
-  		display: none;
-  		width: 100%;
-  		margin-top: -220px;
-  		height: 160em;
-  		background: #3498db;
-  		z-index: 10;
-        position: relative;
-  	}
-  	#left {
-  		display: none;
-  		position: absolute;
-  		width: 100vw;
-  		margin-left: 0vw;
-  		margin-top: -140em;
-        z-index: 11;
-  	}
-  	#left>button {
-  		padding-bottom: .3em;
-  		font-size: 4em;
-  		width: 8em;
-  		margin-left: calc(50vw - 4em);
-  	}
-  	.title {
-  		font-size: 3em;
-  	}
-  	select,
-  	.addrace {
-  		font-size: 1.8em;
-  	}
-  	#placeholder {
-  		font-size: 2.9em;
-  		text-align: center;
-  	}
-  	select {
-  		margin-top: 3em;
-  	}
-  	#edit,
-  	#signout,
-  	#all,
-  	#messages {
-  		font-size: 2.1em;
-  		color: white;
-  	}
-  	button {
-  		font-size: 4em;
-  	}
-  	.color {
-  		font-size: 2em;
-  		width: 92vw;
-  	}
-  	.center-select {
-  		padding-top: 20em;
-  	}
-  }
-
-  @media only screen and (max-width: 40em) {
-  	.addrace {
-  		width: 70vw;
-  	}
-  }
-
+    
   .F-main,
   .F-content {
   	padding: 3em;
@@ -616,25 +508,138 @@ Nullam pretium nunc sed mauris posuere, eu gravida urna aliquet. Morbi efficitur
           background: #ecf0f1;
           text-align: center;
       }
+    
+    
+  /* -------------------------------- MEDIA QUERIES -------------------------------- */
 
-  /*----------------------------------------------------------------------------------*/
-
-  @media only screen and (max-width:72.5em) {
-  	#wrapper {
-  		grid-template-columns: 1fr 1fr 1fr;
+  @media only screen and (max-width: 70em) {
+  
+      #wrapper {
+          grid-template-columns: 1fr;
+         
+      }
+      
+        .card-content>h2 {
+            font-size: 4em;
+      }
+      
+      .sub {
+          font-size: 6em;
+      }
+      
+      p {
+          font-size: 2.7em;
+      }
+      
+      
+    #align {
+  		height: 130vw;
+  	}
+      
+  	.maintitle {
+  		position: absolute;
+  		margin-top: -3em;
+  		z-index: 1;
+  		font-size: 4em;
+  	}
+      
+  	.addrace {
+  		padding: 1em 0em 1em 0em;
+  		width: 30vw;
+  	}
+      
+  	.title {
+  		margin-left: 0em;
+  		width: 100vw;
+  		text-align: center;
+  	}
+  	#center-hide {
+  		position: absolute;
+  		margin-top: 4em;
+  		padding-top: 2em;
+  		height: 6vw;
+  		width: 100vw;
+  		display: flex;
+  		flex-direction: column;
+  		justify-content: center;
+  		align-items: center;
+  		margin-bottom: 2em;
+  	}
+      
+  	#hide {
+  		display: block;
+  		font-size: 4em;
+  		background: none;
+  		color: white;
+        z-index: 11;
+  	}
+  	
+  	#navback {
+  		display: none;
+  		width: 100%;
+  		margin-top: -220px;
+  		height: 160em;
+  		background: #3498db;
+  		z-index: 10;
+        position: relative;
+  	}
+  	#left {
+  		display: none;
+  		position: absolute;
+  		width: 100vw;
+  		margin-left: 0vw;
+  		margin-top: -140em;
+        z-index: 11;
+  	}
+  	#left>button {
+  		padding-bottom: .3em;
+  		font-size: 4em;
+  		width: 8em;
+  		margin-left: calc(50vw - 4em);
+  	}
+  	.title {
+  		font-size: 3em;
+  	}
+  	select,
+  	.addrace {
+  		font-size: 1.8em;
+  	}
+  	#placeholder {
+  		font-size: 2.9em;
+  		text-align: center;
+  	}
+  	select {
+  		margin-top: 3em;
+  	}
+  	#edit,
+  	#signout,
+  	#all,
+  	#messages {
+  		font-size: 2.1em;
+  		color: white;
+  	}
+  	button {
+  		font-size: 4em;
+  	}
+  	.color {
+  		font-size: 2em;
+  		width: 92vw;
+  	}
+  	.center-select {
+  		padding-top: 20em;
   	}
   }
 
-  /*----------------------------------------------------------------------------------*/
-
-  @media only screen and (max-width:59em) {
-  	#wrapper {
-  		grid-template-columns: 1fr 1fr;
-  	}
-  	.nav-item a {
-  		font-size: 1.7em;
+  @media only screen and (max-width: 40em) {
+  	.addrace {
+  		width: 70vw;
   	}
   }
+
+
+  /*----------------------------------------------------------------------------------*/
+
+
 
   /*----------------------------------------------------------------------------------*/
 
@@ -738,7 +743,7 @@ if (isHidden == true){
     S("#left").style.display = "block"; 
     S("#navback").style.display = "block";  
     S("#hide").innerHTML = "&#10006;";
-     S(".block").style.display = "none";
+    S(".block").style.display = "none";
   
 }
  
