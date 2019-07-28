@@ -1,5 +1,6 @@
 # RunUI
-World's first running app written in SwiftUI using Core Location and Core Data.
+World's first running app written in SwiftUI.   
+Using Core Location and Core Data.  
 
 ## Features
 * Map
