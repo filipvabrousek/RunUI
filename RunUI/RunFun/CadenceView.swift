@@ -28,8 +28,7 @@ struct BorderField: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(16)
-            .clipShape(RoundedRectangle(cornerRadius: 30))
-            .border(Color(0x1abc9c), width: 4, cornerRadius: 6)
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 3.0))
     }
 }
 
@@ -62,8 +61,6 @@ struct DrawView: View {
                 Text("Settings").font(.system(size: 36)).bold()
                 Spacer()
             }.padding(.all, 20)
-
-
 
             Toggle(isOn: $isHR) {
                 Text("Toggle:")

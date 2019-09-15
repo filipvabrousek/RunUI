@@ -9,17 +9,14 @@
 import SwiftUI
 import Combine
 
-class FeedFetcher: BindableObject {
-    var willChange = PassthroughSubject<FeedFetcher, Never>()
+class FeedFetcher: ObservableObject {
     
-    var races = [Story](){
-        didSet {
-            willChange.send(self)
-        }
-    }
+    @Published
+    var races = [Story]()
+    
     
     init(){
-        guard let url = URL(string: "http://swimrunny.co/database.txt") else {return}
+        guard let url = URL(string: "http://www.swimrunworld.co/database.txt") else {return}
         
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             // let races = try! JSONDecoder().decode([String].self, from: data)

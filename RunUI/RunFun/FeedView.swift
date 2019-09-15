@@ -32,7 +32,6 @@ struct FeedView : View {
                /* ForEach(posts.identified(by: \.heading)){ post in
                     PostCell(post: post)
                 }*/
-                
                 ForEach(posts, id: \.heading) { p in
                      PostCell(post: p)
                 }

@@ -11,104 +11,37 @@ import Combine
 import CoreData
 import CoreLocation
 
-// How to reload this automatically
 
-
-/*
- 
-class FV: BindableObject {
-    var didChange = PassthroughSubject<Void, Never>()
-    
-    let l = Fetcher(ename: "Activities", key: "runs")
-    
-    
-    var runs: [Run] = []{
-        didSet{
-            didChange.send(())
-        }
-    }
-    
-    init() {
-        fetch()
-    }
-    
-    // init
-    func fetch() {
-        let data = l.fetchR()
-        self.runs = data
-    }
-}*/
-
-
-
-/*
- 
-class FV: NSObject,BindableObject, NSFetchedResultsControllerDelegate {
-    var didChange = PassthroughSubject<FV, Never>()
-    var runs = [Run]()
-    var controller = NSFetchedResultsController<NSFetchRequestResult>()
-    
-    override init(){
-        super.init()
-        controller.delegate = self
-        do {
-            try controller.performFetch()
-        }
-        
-        catch {
-            print("FAILED TO FETCH")
-            print(error)
-        }
-    }
-    
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        let f = Fetcher(ename: "Activities", key: "runs")
-        self.runs = f.fetchR()
-        didChange.send(self)
-    }
-}*/
-
-
-
-
-class FV: BindableObject {
-    var willChange = PassthroughSubject<Void, Never>()
+class FV: ObservableObject {
     let f = Fetcher(ename: "Activities", key: "runs")
-    var runs = [Run]() {
-        didSet {
-            willChange.send(())
-        }
-    }
+
+    @Published
+    var runs = [Run]()
 
     func fetch() {
         self.runs = f.fetchR()
     }
+    
 }
 
-
-
 struct DetailView: View {
-    @State var manager = FV()
+    @EnvironmentObject var manager: FV
     @State var on = true
     @State var mapped = [RunVM]()
 
     var body: some View {
         NavigationView { // or Presentation button
             VStack {
-
                 List {
                     ForEach(manager.runs.reversed(), id: \.self) { run in
                         RunCell(runvm: RunVM(run: run))
                     }.onDelete(perform: delete)
                 }
-
-                // return List(self.manager.runs.map { RunVM(run: $0) }.reversed(), id: \.dist, rowContent: RunCell.init)
-            }
-        } .navigationBarTitle(Text("Runs"))
-            .onAppear(perform: {
+            }.navigationBarTitle("Runs")
+        }
+            .onAppear {
                 self.manager.fetch()
-            })
+        }
     }
 
     func delete(at offsets: IndexSet) {
@@ -121,17 +54,22 @@ struct DetailView: View {
 // https://www.hackingwithswift.com/quick-start/swiftui/how-to-present-a-new-view-using-presentationbutton
 
 struct RunCell: View {
-    // var run: Run
+
     var runvm: RunVM
 
     var body: some View {
         NavigationLink(destination: RunDetail(run: runvm)) {
             HStack {
-                Rectangle().frame(width: 60, height: 60).foregroundColor(Color(0x1abc9c))
+                Map(loc2d: CLLocationCoordinate2D(latitude: runvm.lastLAT, longitude: runvm.lastLON)).frame(width: 60, height: 60)
+                Spacer()
+                Text("Cupertino").font(.system(size: 20)).bold()
+                Spacer()
+                // Rectangle().frame(width: 60, height: 60).foregroundColor(Color(0x1abc9c))
                 VStack(alignment: .leading) {
                     Text(runvm.dist).font(.system(size: 20)).bold()
                     Text(runvm.time)
                 }
+                Spacer()
             }.navigationBarTitle(Text("Runs"))
         }
         // PresentationButton(Text("Show"), destination: RunDetail(run: run)) - WEIRD STYLE

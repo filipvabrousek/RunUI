@@ -113,7 +113,7 @@ class Time {
     
     var createTime:String{
         let time =  (seconds / 3600, (seconds % 3600) / 60, seconds % 60)
-        let (h, m, s) = time
+        let (_, m, s) = time
         
      //   var strHr = String(h)
         var strMin = String(m)

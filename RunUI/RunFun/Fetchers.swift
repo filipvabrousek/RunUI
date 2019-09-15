@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class Saver{
+class Saver {
     
     var ename: String
     var key: String
