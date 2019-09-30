@@ -20,7 +20,7 @@ Updated for xCode 11 GM
 * DynamicProperty (@State, @ObservedObject, @EnvironmentObject, @GestureState, @Binding)
 
 
-# Advanced SwiftUI
+# AdvancedUI
 * Shape morphing
 * PreferenceKey
 * Slider (causing animation)
