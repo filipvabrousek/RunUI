@@ -13,9 +13,11 @@ import CoreLocation
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var slm = SLM(start: CLLocation(latitude: 0.0, longitude: 0.0))
-    var timer = MyTimer()
-    var fv = FV()
+    let slm = SLM(start: CLLocation(latitude: 0.0, longitude: 0.0))
+    let timer = MyTimer()
+    let fv = FV()
+    let start = Started()
+    let fetcher = PostFetcher()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -29,7 +31,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     ContentView()
                     .environmentObject(slm)
                     .environmentObject(timer)
-                    .environmentObject(fv))
+                    .environmentObject(fv)
+                    .environmentObject(start)
+                    .environmentObject(fetcher))
+            
             self.window = window
             window.makeKeyAndVisible()
         }

@@ -11,10 +11,11 @@ import SwiftUI
 struct ContentView : View {
     var body: some View {
         TabView {
-            ActivityView().tabItem {Image("envelope"); Text("Run")}.tag(0)
-            DetailView().tabItem {Image("envelope"); Text("Runs")}.tag(1)
-            FeedView().tabItem {Image("envelope"); Text("Feed")}.tag(2)
-            CadenceView().tabItem {Image("envelope"); Text("Cadence")}.tag(3)
+            ActivityView().tabItem {Image("circle"); Text("Run")}.tag(0)
+            DetailView().tabItem {Image("circle"); Text("Runs")}.tag(1)
+            FeedView().tabItem {Image("circle"); Text("Feed")}.tag(2)
+            Forma().tabItem {Image("circle"); Text("Shop")}.tag(3)
+            AnimationView().tabItem{Image("circle"); Text("Animation")}.tag(4)
         }
         .onAppear(perform: {UserDefaults.standard.set("NO", forKey: "done")})
     }

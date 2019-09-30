@@ -28,7 +28,7 @@ class FeedFetcher: ObservableObject {
                 var res = [Story]()
                 
                 for x in arr {
-                    res.append(Story(name: x, image: "first"))
+                    res.append(Story(name: String(x.prefix(5)), image: "first"))
                 }
                 
                 DispatchQueue.main.async {
@@ -36,7 +36,11 @@ class FeedFetcher: ObservableObject {
                 }
             }
                 
-            catch {}
+            catch {
+                if error != nil {
+                    print("Err \(error)")
+                }
+            }
             }.resume()
     }
 }

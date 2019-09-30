@@ -14,18 +14,84 @@ import CoreData
 import CoreGraphics
 
 
+struct ActivityView: View {
+    @EnvironmentObject var manager: SLM //= SLM(start: CLLocation(latitude: 0.0, longitude: 0.0))
+    @EnvironmentObject var timer: MyTimer
+    @EnvironmentObject var started: Started
+    @State var rm = FV()
+    @State var duration = 0
+    @State var formatted = ""
+    @State var hideStart = false
+
+    var body: some View {
+        VStack {
+
+            DataView()
+
+            ZStack(alignment: .bottomLeading) {
+                MapView(loc2D: CLLocationCoordinate2D(latitude: manager.lastLoc.coordinate.latitude, longitude: manager.lastLoc.coordinate.longitude), isDetail: false)
+
+                if hideStart == false {
+                    Button("Start") {
+                        //self.started.didStart = true
+                        self.hideStart = true
+                        self.timer.reset()
+                        self.manager.reset()
+                        self.manager.execute()
+                    }
+                        .modifier(Start())
+                        .offset(x: 290, y: -30)
+                }
+
+                if hideStart == true {
+                    Button("Stop") {
+                        let m = self.manager
+                        let run = Run(dist: m.distance, time: self.timer.formatted, latPoints: m.latpoints, lonPoints: m.lonpoints)
+                        let s = Saver(ename: "Activities", key: "runs", obj: run)
+                        print("SAVED")
+                        s.save()
+                        self.started.didStart = false
+                        // self.hideStart = false
+                    }
+                        .modifier(Stop())
+                        .offset(x: 290, y: -30)
+                }
+            }
+        }.onAppear {
+            self.timer.setDisplay()
+            self.manager.reset()
+            self.hideStart = false
+            self.started.didStart = false
+        }
+    }
+}
+
+
+
+
 class MyTimer: ObservableObject {
     @Published var duration: Int = 0
     @Published var formatted = ""
+    var begin = false
 
     init() {
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            self.duration += 1
-            
-            let t = Time(seconds: self.duration)
-            self.formatted = t.createTime
-            print("F \(self.formatted)")
+            if self.begin {
+                self.duration += 1
+                let t = Time(seconds: self.duration)
+                self.formatted = t.createTime
+            }
         }
+    }
+
+    func reset() {
+        duration = 0
+        formatted = "00:00"
+        begin = true
+    }
+
+    func setDisplay() {
+        formatted = "00:00"
     }
 }
 
@@ -55,48 +121,13 @@ struct DataView: View {
                 }.frame(minWidth: 90)
                 Spacer()
             }
-        }.padding(.top, 40)
+        }
     }
 }
 
 
 
-struct ActivityView: View {
-    @EnvironmentObject var manager: SLM //= SLM(start: CLLocation(latitude: 0.0, longitude: 0.0))
-    @EnvironmentObject var timer: MyTimer
-    @State var rm = FV()
-    @State var duration = 0
-    @State var formatted = ""
 
-    var body: some View {
-        VStack {
-    
-            DataView()
-
-            ZStack(alignment: .bottomLeading) {
-                MapView(loc2D: CLLocationCoordinate2D(latitude: manager.lastLoc.coordinate.latitude, longitude: manager.lastLoc.coordinate.longitude))
-
-                Button("Save") {
-                    let m = self.manager
-                    let run = Run(dist: m.distance, time: self.timer.formatted, latPoints: m.latpoints, lonPoints: m.lonpoints)
-                    let s = Saver(ename: "Activities", key: "runs", obj: run)
-                    print("SAVED")
-                    s.save()
-                }
-                    .padding()
-                    .font(Font.body.bold())
-                    .background(Color.green)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(8)
-                    .offset(x: 290, y: -30)
-
-            }.padding(.bottom, 20)
-
-
-
-        }.frame(height: UIScreen.main.bounds.height)
-    }
-}
 
 
 
@@ -104,7 +135,13 @@ struct ActivityView: View {
 
 // https://stackoverflow.com/questions/56553527/show-user-location-on-map-swiftui
 
+
+class Started: ObservableObject {
+    @Published var didStart = false
+}
+
 class SLM: NSObject, CLLocationManagerDelegate, ObservableObject {
+    @State var allow = false
     private var manager = CLLocationManager()
 
     @Published
@@ -121,6 +158,9 @@ class SLM: NSObject, CLLocationManagerDelegate, ObservableObject {
 
     @Published
     var lonpoints: [Double]
+
+
+    var begin = false
 
     var start: CLLocation
 
@@ -142,25 +182,33 @@ class SLM: NSObject, CLLocationManagerDelegate, ObservableObject {
         self.manager.startUpdatingLocation()
     }
 
+    func execute() {
+        begin = true
+    }
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.last != nil {
 
-            // let rand = Int.random(in: 1000...100000)
 
-            if let val = UserDefaults.standard.value(forKey: "done") as? String {
-                if val == "NO" { // set to NO in SceneDelegate
-                    firstLoc = locations.last!
-                    UserDefaults.standard.set("YES", forKey: "done")
+        if begin {
+
+
+            if locations.last != nil {
+                if let val = UserDefaults.standard.value(forKey: "done") as? String {
+                    if val == "NO" { // set to NO in SceneDelegate
+                        firstLoc = locations.last!
+                        UserDefaults.standard.set("YES", forKey: "done")
+                    }
                 }
+
+                lastLoc = locations.last!
+                distance = locations.last!.distance(from: firstLoc) // from: start
+                print("D \(distance)")
+
+                latpoints.append(lastLoc.coordinate.latitude)
+                lonpoints.append(lastLoc.coordinate.longitude)
             }
-
-            lastLoc = locations.last!
-            distance = locations.last!.distance(from: firstLoc) // from: start
-            print("D \(distance)")
-
-            latpoints.append(lastLoc.coordinate.latitude)
-            lonpoints.append(lastLoc.coordinate.longitude)
         }
+
     }
 
 
@@ -169,48 +217,20 @@ class SLM: NSObject, CLLocationManagerDelegate, ObservableObject {
             manager.startUpdatingLocation()
         }
     }
-}
 
+    func reset() {
+        self.begin = false
+        self.latpoints = [Double]()
+        self.lonpoints = [Double]()
+        self.distance = 0.0
 
-struct MapView: UIViewRepresentable {
-    var loc2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-
-    init(loc2D: CLLocationCoordinate2D) {
-        self.loc2D = loc2D
-    }
-
-    var LM: CLLocationManager = {
-        let lm = CLLocationManager()
-        lm.desiredAccuracy = kCLLocationAccuracyBest
-        lm.requestAlwaysAuthorization()
-        return lm
-    }()
-
-    func makeUIView(context: UIViewRepresentableContext<MapView>) -> MapView.UIViewType {
-        // MKMapView(frame: .zero)
-
-        let map: MKMapView = {
-            let map = MKMapView()
-            map.showsUserLocation = true
-            // user tracing mode
-            return map
-        }()
-
-        return map
-    }
-
-    func updateUIView(_ view: MKMapView, context: Context) {
-
-        let coord = LM.location?.coordinate
-
-        if coord != nil {
-            let coord = CLLocationCoordinate2D(latitude: loc2D.latitude, longitude: loc2D.longitude)
-            let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007) // 0.005
-            let region = MKCoordinateRegion(center: coord, span: span)
-            view.setRegion(region, animated: false)
+        if manager.location != nil {
+            self.lastLoc = manager.location!
         }
     }
 }
+
+
 
 
 #if DEBUG

@@ -21,7 +21,7 @@ class FV: ObservableObject {
     func fetch() {
         self.runs = f.fetchR()
     }
-    
+
 }
 
 struct DetailView: View {
@@ -60,13 +60,13 @@ struct RunCell: View {
     var body: some View {
         NavigationLink(destination: RunDetail(run: runvm)) {
             HStack {
-                Map(loc2d: CLLocationCoordinate2D(latitude: runvm.lastLAT, longitude: runvm.lastLON)).frame(width: 60, height: 60)
-                Spacer()
-                Text("Cupertino").font(.system(size: 20)).bold()
-                Spacer()
+                MapView(loc2D: CLLocationCoordinate2D(latitude: runvm.lastLAT, longitude: runvm.lastLON), isDetail: true)
+                    .frame(width: 60, height: 60)
+
                 // Rectangle().frame(width: 60, height: 60).foregroundColor(Color(0x1abc9c))
                 VStack(alignment: .leading) {
-                    Text(runvm.dist).font(.system(size: 20)).bold()
+                    Text("Cupertino").font(.system(size: 20)).bold()
+                    Text("\(runvm.dist) km")
                     Text(runvm.time)
                 }
                 Spacer()

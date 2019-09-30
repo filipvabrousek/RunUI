@@ -8,6 +8,92 @@
 
 import SwiftUI
 
+struct Forma: View {
+
+    @State var name = ""
+    @State var on = false
+    @State var n = 0
+    @State var selected = "select"
+    @State var food = ["wrap", "nuggets", "McFlurry"]
+    @State var foodIndex = 0
+    @State var order = ""
+    @State var allergic = false
+    @State var code = ""
+    @State var done = false
+
+    var body: some View {
+
+        NavigationView {
+            if done == false {
+                Form {
+                    Section(header: Text("Personal info")) {
+                        TextField("Enter your name", text: $name)
+
+                        Picker(selection: $foodIndex, label: Text("Pick your food")) {
+                            ForEach(0..<food.count) {
+                                Text(self.food[$0]).tag($0)
+                            }
+                        } //.pickerStyle(SegmentedPickerStyle())
+
+                        Stepper(value: $n) {
+                            Text("\(food[foodIndex]) : \(n)")
+                        }
+
+                        Toggle(isOn: $allergic) {
+                            Text("Do you have a coupon code?")
+                        }
+
+                        if allergic {
+                            TextField("Enter coupon code.", text: $code)//.textContentType(.numberPad)
+                        }
+                    }
+
+                    Section(header: Text("Review your order")) {
+                        Text(" \(food[foodIndex]) x \(self.n) ").bold()
+                    }
+                    
+                    Section(header: Text("Place your order")) {
+                        Button("Place order") {
+                            self.done = true
+                        }
+                    }
+                }.navigationBarTitle("Order")
+            } else {
+                VStack {
+                    Button("Back"){
+                        self.done = false
+                    }.padding(20)
+    
+                    Spacer()
+                    
+                    Image("iceland").resizable().frame(width: 80, height: 80).clipShape(Circle()).padding(20)
+                    Text("Thank you for your order")
+                        .font(.system(size: 21, weight: .bold, design: .default))
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                    Spacer()
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 struct P {
     var x: Int = 0
     var y: Int = 0
@@ -58,7 +144,7 @@ struct DrawView: View {
         VStack {
 
             HStack {
-                Text("Settings").font(.system(size: 36)).bold()
+                Text("Form").font(.system(size: 36)).bold()
                 Spacer()
             }.padding(.all, 20)
 
@@ -92,9 +178,9 @@ struct DrawView: View {
                     path.addEllipse(in: .init(x: p.x, y: p.y, width: 23, height: 23))
                 }
             }.fill()
-            
+
             Spacer()
-                
+
 
 
             /*  if isHR {
