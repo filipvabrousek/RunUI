@@ -1,5 +1,8 @@
-## CheckList
 ### RunUI:
+World's first running app written in SwiftUI.  
+Using Core Location and Core Data.  
+Updated for xCode 11 GM  
+
 * Distance measuring
 * List (vertical, horizontal)
 * NavigationView
@@ -30,4 +33,6 @@
 #### To-Do:
 * Transaction
 
-29/9/2019
+
+29/9/2019  
+(17/8/2019 - first version)
