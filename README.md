@@ -1,4 +1,4 @@
-### RunUI:
+# RunUI:
 World's first running app written in SwiftUI.  
 Using Core Location and Core Data.  
 Updated for xCode 11 GM  
@@ -20,7 +20,7 @@ Updated for xCode 11 GM
 * DynamicProperty (@State, @ObservedObject, @EnvironmentObject, @GestureState, @Binding)
 
 
-### Anim:
+# Anim:
 * Shape morphing
 * PreferenceKey
 * Slider (causing animation)
@@ -30,7 +30,7 @@ Updated for xCode 11 GM
 * GeometryEffect
 * Alignment Guide
 
-#### To-Do:
+## To-Do:
 * Transaction
 
 
