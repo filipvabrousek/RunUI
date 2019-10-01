@@ -3,6 +3,8 @@ World's first running app written in SwiftUI.
 Using Core Location and Core Data.  
 Updated for xCode 11 GM  
 
+![screenshots](https://pbs.twimg.com/media/EFvR9b3XkAALrse?format=jpg&name=4096x4096)
+
 * Distance measuring
 * List (vertical, horizontal)
 * NavigationView
@@ -18,6 +20,7 @@ Updated for xCode 11 GM
 * Custom Drawing
 * Gestures
 * DynamicProperty (@State, @ObservedObject, @EnvironmentObject, @GestureState, @Binding)
+
 
 
 # AdvancedUI
