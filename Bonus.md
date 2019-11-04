@@ -202,3 +202,5 @@ struct Grad: AnimatableModifier {
 }
 ```
 
+SOURCE: https://swiftui-lab.com/
+Many thanks!
