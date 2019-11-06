@@ -202,6 +202,46 @@ struct Grad: AnimatableModifier {
 }
 ```
 
+## Insettable Shape
+```swift
+
+struct ArcView: View {
+    var body: some View {
+        Arc(start: .degrees(-90), end: .degrees(90), clockwise: true)
+            .strokeBorder(Color.blue, lineWidth: 40)
+    }
+}
+
+struct Arc: InsettableShape {
+    var start: Angle
+    var end: Angle
+    var clockwise: Bool
+    var inset: CGFloat = 0
+
+    func path(in rect: CGRect) -> Path {
+        let rotation = Angle.degrees(90)
+        let moda = start - rotation
+        let modb = end - rotation
+
+        var path = Path()
+        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY),
+            radius: rect.width / 2 - inset,
+            startAngle: moda,
+            endAngle: modb,
+            clockwise: !clockwise)
+
+        return path
+    }
+
+    func inset(by amount: CGFloat) -> some InsettableShape {
+        var arc = self
+        arc.inset += amount
+        return arc
+    }
+}
+```
+
 SOURCE: https://swiftui-lab.com/  
 4/11/2019  
+6/11/2019
 Many thanks!  
