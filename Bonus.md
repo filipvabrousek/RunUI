@@ -241,6 +241,8 @@ struct Arc: InsettableShape {
 }
 ```
 
+.drawingGroup() = Metal usage, performance improvements
+
 SOURCE: https://swiftui-lab.com/  
 4/11/2019  
 6/11/2019
