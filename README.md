@@ -33,9 +33,6 @@ Updated for xCode 11 GM
 * GeometryEffect
 * Alignment Guide
 
-## To-Do:
-* Transaction
-
 
 29/9/2019  
 (17/8/2019 - first version)
