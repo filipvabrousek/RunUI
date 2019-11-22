@@ -66,12 +66,12 @@ struct Accesibility: View {
 ```
 
 ### Scheme
+* compositing group makes compositing effects in this view’s ancestor views, like opacity and the blend mode, take effect before this view renders.
 ```swift
 Text("Command")
             .colorScheme(.light)
             .preferredColorScheme(.dark)
-        // A compositing group makes compositing effects in this view’s ancestor views, like opacity and the blend mode, take effect before this view renders.
-        .compositingGroup()
+            .compositingGroup()
             .moveDisabled(true)
 ```
 
@@ -115,11 +115,9 @@ struct Paste: View {
 ### onHover
 ```swift
 Text("Hover me")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .focusable()
-            .onHover { (val) in
-            print("Hovering")
-}
+         .frame(maxWidth: .infinity, maxHeight: .infinity)
+         .focusable()
+         .onHover { (val) in print("Hovering") }
 ```
 
 ## TouchBar
@@ -138,12 +136,7 @@ struct Touch: View {
 ```
 
 
-## Controls
-
+## ControlSize
 ```swift
-struct Controls: View {
-    var body: some View {
-        Text("Hey").controlSize(.mini)
-    }
-}
+      Text("Hey").controlSize(.mini)
 ```
