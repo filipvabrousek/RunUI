@@ -134,6 +134,29 @@ struct Touch: View {
 ```
 
 
+## horizontalRadioGroupLayout
+
+```swift
+struct ContentView: View {
+    @State var text: String = ""
+
+    var body: some View {
+        Group {
+            Picker(selection: $text, label: Text("Hey")) {
+                Text("Wow")
+            }
+
+            Spacer()
+
+            Picker(selection: $text, label: Text("Hey")) {
+                Text("Wow")
+            }
+        }.horizontalRadioGroupLayout()
+    }
+}
+```
+
+
 ## Text
 ```swift
 Text("Hey there!")
