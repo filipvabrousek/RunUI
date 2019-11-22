@@ -4,12 +4,11 @@
 ### Mask
 ```swift
 Image("iceland")
-            .resizable()
-            .frame(width: 200, height: 200)
-            .imageScale(.large)
-            .keyboardType(.emailAddress)
-            .mask(Text("SwiftUI")
-                    .font(.system(size: 40, weight: .black, design: .default)))
+         .resizable()
+         .frame(width: 200, height: 200)
+         .imageScale(.large)
+         .mask(Text("SwiftUI")
+         .font(.system(size: 40, weight: .black, design: .default)))
 ```
 
 ### KeyboardType
@@ -74,7 +73,6 @@ Text("Command")
             .compositingGroup()
             .moveDisabled(true)
 ```
-
 
 ### PopOver
 ```swift
