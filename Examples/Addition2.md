@@ -171,7 +171,28 @@ Text("Hey there!")
       Text("Hey").controlSize(.mini)
 ```
 
+## Anchor
+```swift
 
+struct AnchorTest: View {
+    @State var rotate: Bool = false
+
+    var body: some View {
+
+        VStack {
+            Rectangle()
+                .frame(width: 80, height: 80)
+                .foregroundColor(Color.blue)
+                .rotationEffect(Angle(degrees: rotate ? 0 : 180), anchor: .topLeading)
+                .padding()
+                .animation(Animation.spring().repeatForever(autoreverses: true))
+        }.onAppear {
+            self.rotate.toggle()
+        }
+
+    }
+}
+```
 
 ## MenuButtonStyle
 * conforming type: ```struct BorderlessButtonMenuButtonStyle```
