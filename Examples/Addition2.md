@@ -134,10 +134,21 @@ struct Touch: View {
 ```
 
 
+## Text
+```swift
+Text("Hey there!")
+      .italic()
+      .baselineOffset(23.0)
+      .underline()
+      .strikethrough(true, color: .blue)
+```
+
 ## ControlSize
 ```swift
       Text("Hey").controlSize(.mini)
 ```
+
+
 
 ## MenuButtonStyle
 * conforming type: ```struct BorderlessButtonMenuButtonStyle```
