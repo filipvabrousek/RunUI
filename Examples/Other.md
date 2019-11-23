@@ -1,6 +1,6 @@
 ## Font
 
-```swift
+```
 .largeTitle
 .title
 .headline
