@@ -12,7 +12,7 @@
 * Gradient (LinearGradient, AngularGradient, RadialGrdient)
 * ForegroundStyle  
 * FillStyle
-* SHapeStyle
+* ShapeStyle
 * RoundedCornerStyle
 * SelectionShapeStyle
 * SepearatorShapeStyle
