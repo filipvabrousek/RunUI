@@ -1,6 +1,7 @@
 ## FetchedRequest
 * crashes
 
+## Class
 ```swift
 class User: NSManagedObject {
     @NSManaged var name: String
@@ -16,8 +17,10 @@ extension User {
         return req
     }
 }
+```
 
-
+## Views
+```
 struct FetchView: View {
     @Environment(\.managedObjectContext) var ctx: NSManagedObjectContext
     @FetchRequest(fetchRequest: User.getNodes()) var res: FetchedResults<User>
