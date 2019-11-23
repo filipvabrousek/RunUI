@@ -91,3 +91,7 @@ struct CWidth: ViewModifier {
 // SOURCE: https://medium.com/better-programming/using-the-preferencekey-protocol-to-align-views-7f3ae32f60fc
 // Many thanks!
 ```
+
+## OverlayPreferenceValue
+## BackgroundPreferenceValue
+* Returns a view that reads the value of preference Key from self, uses that to produce another view which is displayed as an overlay on self.
