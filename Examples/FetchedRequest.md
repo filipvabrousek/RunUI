@@ -20,7 +20,7 @@ extension User {
 ```
 
 ## Views
-```
+```swift
 struct FetchView: View {
     @Environment(\.managedObjectContext) var ctx: NSManagedObjectContext
     @FetchRequest(fetchRequest: User.getNodes()) var res: FetchedResults<User>
