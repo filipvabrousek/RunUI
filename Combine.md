@@ -1,5 +1,65 @@
 # Combine
 
+## 1
+```swift
+let publisher = Just(1) // Publisher
+// subscripber
+publisher.sink(receiveCompletion: { _ in
+    print("Finished")
+}) { (value) in
+    print(value)
+}
+```
+
+## 2
+```swift
+// Failure type is Never (indictaes that it ends successfully)
+let sub = PassthroughSubject<String, Never>()
+sub.sink(receiveCompletion: { _ in
+    print("Finished")
+}) { res in
+    print(res)
+}
+
+sub.send("Hey")
+sub.send(completion: .finished)
+```
+
+## 3
+* Current Value Subject - starts with initial value
+```swift
+let subj = CurrentValueSubject<Int, Never>(1)
+subj.send(2)
+print(subj.value)
+
+subj.sink { val in
+    print(val)
+}
+```
+
+## 4
+* Publisher and Subscriber Life Cycle
+* 1 - subscriber connets to the Publisher by Calling Subscribe<S>(S)
+* 2 - Publisher creates a subscription by calling receive<S>(subscriber: S) on itself
+* 3 - Publisher calls receive(subscription:) on the subscriber
+* 4 - Subscriber calls request(:) on the subscription and passes Demand parameter (how many times can send)
+* 5 - Publisher sends value by calling receive(_:) on the subscriber
+* 6 - Subscription ends with outcomes: Cancelled, Finish, Fail
+    
+    
+```swift
+let sm = PassthroughSubject<Int, Never>()
+let token = sm
+    .print()
+    .sink { val in
+        print("Value \(val)")
+}
+
+sm.send(3)
+```
+
+
+## Advanced
 ```swift
 enum iOSError: Error {
     case wrong
@@ -44,3 +104,6 @@ print("Latest post \(l.text!)")
 
 
 ```
+
+SOURCE: // https://www.vadimbulavin.com/swift-combine-framework-tutorial-getting-started/
+Many thanks!
