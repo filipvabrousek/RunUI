@@ -39,12 +39,12 @@ subj.sink { val in
 
 ## 4
 * Publisher and Subscriber Life Cycle
-* 1 - subscriber connets to the Publisher by Calling Subscribe<S>(S)
-* 2 - Publisher creates a subscription by calling receive<S>(subscriber: S) on itself
-* 3 - Publisher calls receive(subscription:) on the subscriber
-* 4 - Subscriber calls request(:) on the subscription and passes Demand parameter (how many times can send)
-* 5 - Publisher sends value by calling receive(_:) on the subscriber
-* 6 - Subscription ends with outcomes: Cancelled, Finish, Fail
+* 1 - subscriber connets to the Publisher by Calling ```Subscribe<S>(S)```
+* 2 - Publisher creates a subscription by calling ```receive<S>(subscriber: S)``` on itself
+* 3 - Publisher calls ```receive(subscription:)``` on the subscriber
+* 4 - Subscriber calls ```request(:)``` on the subscription and passes ```Demand``` parameter (how many times can send)
+* 5 - Publisher sends value by calling ```receive(_:)``` on the subscriber
+* 6 - Subscription ends with outcomes: ```Cancelled, Finish, Fail```
     
     
 ```swift
