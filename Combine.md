@@ -100,9 +100,6 @@ PP.subscribe(lasta)
 let post = P(content: "I love Combine!")
 NotificationCenter.default.post(name: .new, object: post)
 print("Latest post \(l.text!)")
-
-
-
 ```
 
 SOURCE: // https://www.vadimbulavin.com/swift-combine-framework-tutorial-getting-started/
