@@ -10,6 +10,8 @@
 
 ## ObservedObject
 * you need to **pass** the object
+* required for preference types (Class)
+* shares data in many Views
 * if View C wanted data from View A, you would need to hand the object also to View B
 
 ## $ - 2 way binding, reads and writes Value
