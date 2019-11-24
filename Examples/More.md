@@ -1,6 +1,5 @@
 ## Addition2
 
-
 ### Mask
 ```swift
 Image("iceland")
