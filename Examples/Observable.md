@@ -73,4 +73,4 @@ struct D: View {
     }
 }
 ```
-## $ - 2 way binding, reads and writes Value
+## $ = 2 way binding, reads and writes Value
