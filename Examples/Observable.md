@@ -6,7 +6,6 @@
  ```
  
 ```swift
-
 class Env: ObservableObject {
     @Published var data: String = ""
 }
@@ -51,24 +50,20 @@ struct B: View {
 
 struct C: View {
     @ObservedObject var env = Env()
-    //   EO we have to set it up in SceneDelegate()
 
     var body: some View {
         VStack {
             Button("Crack") {
                 self.env.data = "Heya !!!"
-               // self.env.data = "Heyo"
             }
 
-            // YOU HAVE TO PASS IT
-            D(title: self.$env.data)//.environmentObject(env)
+            D(title: self.$env.data)
         }
     }
 }
 
 
 struct D: View {
-   // @ObservedObject var env = Env()
     var title: Binding<String>
 
     var body: some View {
