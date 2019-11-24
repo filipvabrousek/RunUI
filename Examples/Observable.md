@@ -1,6 +1,6 @@
 ## EnvironmentObject
 * need to set it in SceneDelegate()
-
+* ALL Views update if something changes
 ```swift
  let contentView = A().environmentObject(Env())
  ```
