@@ -1,7 +1,5 @@
 ## EnvironmentObject
-* you do **not** have to pass it
 * need to set it in SceneDelegate()
-* any View can access it
 
 ```swift
  let contentView = A().environmentObject(Env())
@@ -44,12 +42,10 @@ struct B: View {
 ```
 
 ## ObservedObject
-* you **have to** pass the object
 * no need to set it in SceneDelegate()
 * required for reference types (Class)
-* if View C wanted data from View A, you would need to hand the object also to View B
+* need to pass through Views
 
-## $ - 2 way binding, reads and writes Value
 
 ```swift
 C: View {
@@ -78,3 +74,4 @@ struct D: View {
     }
 }
 ```
+## $ - 2 way binding, reads and writes Value
