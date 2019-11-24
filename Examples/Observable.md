@@ -48,28 +48,29 @@ struct B: View {
 
 
 ```swift
-C: View {
+
+struct C: View {
     @ObservedObject var env = Env()
     //   EO we have to set it up in SceneDelegate()
 
     var body: some View {
         VStack {
-            Button("Crack") {
+            Button("Crack \(self.env.data)") {
                 self.env.data = "Heya !!!"
             }
 
+            // YOU HAVE TO PASS IT
             D()//.environmentObject(env)
         }
     }
 }
-
 
 struct D: View {
     @ObservedObject var env = Env()
 
     var body: some View {
         VStack {
-            Text("Value \(env.data)")
+            Text("D Value \(env.data)")
         }
     }
 }
