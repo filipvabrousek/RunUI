@@ -55,22 +55,25 @@ struct C: View {
 
     var body: some View {
         VStack {
-            Button("Crack \(self.env.data)") {
+            Button("Crack") {
                 self.env.data = "Heya !!!"
+               // self.env.data = "Heyo"
             }
 
             // YOU HAVE TO PASS IT
-            D()//.environmentObject(env)
+            D(title: self.$env.data)//.environmentObject(env)
         }
     }
 }
 
+
 struct D: View {
-    @ObservedObject var env = Env()
+   // @ObservedObject var env = Env()
+    var title: Binding<String>
 
     var body: some View {
         VStack {
-            Text("D Value \(env.data)")
+            Text("D Value \(title.wrappedValue)")
         }
     }
 }
