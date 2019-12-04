@@ -1,4 +1,5 @@
 # PreferenceKey
+* had to rewrite it 
 
 ```swift
 
@@ -26,57 +27,61 @@ struct Fields: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
 
+struct Wrapper: View {
+    @State var w: CGFloat? = nil
+
+    var body: some View {
+        VStack {
             HStack {
-                Text("Third").bold()
-                    .frame(width: width, alignment: .leading)
-                    .background(EqualiserView())
-                TextField("Enter first item", text: $c)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                Text("Simple")
+                    .background(MEqualiser())
+                    .frame(width: w, alignment: .leading)
+                Rectangle().frame(width: 40, height: 40)
             }
-        }.modifier(CWidth(width: $width))
+
+            HStack {
+                Text("Lot longer")
+                    .background(MEqualiser())
+                    .frame(width: w, alignment: .leading)
+                Rectangle().frame(width: 40, height: 40)
+            }
+        }.modifier(CMWidth(width: $w))
     }
 }
 
-struct WPref: Equatable {
+
+struct WP: Equatable {
     let width: CGFloat
 }
 
-struct ColumnKey: PreferenceKey {
-    typealias Value = [WPref]
-    static var defaultValue: [WPref] = []
-    static func reduce(value: inout [WPref], nextValue: () -> [WPref]) {
+struct CKey: PreferenceKey {
+    typealias Value = [WP]
+    static var defaultValue: [WP] = []
+    static func reduce(value: inout [WP], nextValue: () -> [WP]) {
         value.append(contentsOf: nextValue())
     }
 }
 
-
-
-// it gets the width of each Text() using GR (used as background)
-// generates (key/value) pair for the CWidth()
-struct EqualiserView: View {
+struct MEqualiser: View {
     var body: some View {
-        GeometryReader { g in
+        GeometryReader { geometry in
             Rectangle()
-                .fill(Color.blue)
-                .preference(key: ColumnKey.self,
-                    value: [WPref(width: g.frame(in: .global).width)])
+                .fill(Color.clear)
+                .preference(
+                    key: CKey.self,
+                    value: [WP(width: geometry.frame(in: .global).width)]
+                )
         }
     }
 }
 
 
-
-// Listens for preference changes trigerred by EqalizerView() above
-/* Iterate through the preference key/value pairs for all the child views looking for the widest Text view, which it saves to width the argument passed to it (so all textViews fit)  */
-
-/*
- named value produced by a view. Views with multiple children automatically combine all child values into a single value visible to their ancestors. */
-struct CWidth: ViewModifier {
+struct CMWidth: ViewModifier {
     @Binding var width: CGFloat?
 
     func body(content: Content) -> some View {
         content
-            .onPreferenceChange(ColumnKey.self) { (prefs) in
+            .onPreferenceChange(CKey.self) { prefs in
                 for p in prefs {
                     let old = self.width ?? CGFloat.zero
                     if p.width > old {
@@ -86,7 +91,6 @@ struct CWidth: ViewModifier {
         }
     }
 }
-
 
 // SOURCE: https://medium.com/better-programming/using-the-preferencekey-protocol-to-align-views-7f3ae32f60fc
 // Many thanks!
