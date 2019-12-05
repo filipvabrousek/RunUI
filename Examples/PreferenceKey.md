@@ -3,30 +3,6 @@
 
 ```swift
 
-struct Fields: View {
-    @State var a: String = ""
-    @State var b: String = ""
-    @State var c: String = ""
-    @State var width: CGFloat? = nil
-
-    var body: some View {
-        Form {
-            HStack {
-                Text("First").bold()
-                    .frame(width: width, alignment: .leading)
-                    .background(EqualiserView())
-                TextField("Enter first item", text: $a)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-            }
-
-            HStack {
-                Text("Second").bold()
-                    .frame(width: width, alignment: .leading)
-                    .background(EqualiserView())
-                TextField("Enter first item", text: $b)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-            }
-
 struct Wrapper: View {
     @State var w: CGFloat? = nil
 
@@ -45,15 +21,18 @@ struct Wrapper: View {
                     .frame(width: w, alignment: .leading)
                 Rectangle().frame(width: 40, height: 40)
             }
-        }.modifier(CMWidth(width: $w))
+        }.modifier(WrapWidth(width: $w))
     }
 }
+
 
 
 struct WP: Equatable {
     let width: CGFloat
 }
 
+
+// We are changing values of CKey through MEqualiser View (we feed geometry.frame into it)
 struct CKey: PreferenceKey {
     typealias Value = [WP]
     static var defaultValue: [WP] = []
@@ -68,15 +47,16 @@ struct MEqualiser: View {
             Rectangle()
                 .fill(Color.clear)
                 .preference(
-                    key: CKey.self,
+                    key: CKey.self, // we get the width here and we listen for this call in CMWidth
                     value: [WP(width: geometry.frame(in: .global).width)]
                 )
         }
     }
 }
 
-
-struct CMWidth: ViewModifier {
+// Listens for preference changes trigerred by MEqualiser() above
+/* Iterate through the preference key/value pairs for all the child views looking for the widest Text view, which it saves to width the argument passed to it (so all Text view fit)  */
+struct WrapWidth: ViewModifier {
     @Binding var width: CGFloat?
 
     func body(content: Content) -> some View {
